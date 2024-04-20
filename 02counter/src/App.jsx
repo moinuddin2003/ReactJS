@@ -8,26 +8,34 @@ function App() {
   let [counter, setCounter] = useState(10)
 
   const addValue = () => {
-    // counter = counter + 1
-    setCounter(counter+1);
-    console.log('Add', counter+1);
-    
-    
+    if (counter < 20) {
+      counter = counter + 1
+      setCounter(counter);
+      console.log('Add', counter);
+    }
+    else {
+      alert('Limit reached')
+    }
   }
-  const removeValue = ()=>
-  {
-    setCounter(counter - 1)
-    console.log('Removed', counter);
+
+  const removeValue = () => {
+    if (counter > 0) {
+      setCounter(counter - 1)
+      console.log('Removed', counter);
+    }
+    else {
+      alert('You are now at 0 and not allowed to go below 0')
+    }
   }
 
   return (
     <>
-  <h1>Chai or Babu</h1>
-  <h2>Counter Value: {counter} </h2>
+      <h1>Chai or Babu</h1>
+      <h2>Counter Value: {counter} </h2>
 
-  <button onClick = {addValue}>Add Value</button>
-  <br/>
-  <button onClick={removeValue}>Remove Value</button>
+      <button onClick={addValue}>Add Value</button>
+      <br />
+      <button onClick={removeValue}>Remove Value</button>
     </>
   );
 }
