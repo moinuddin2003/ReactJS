@@ -3,8 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-import {Home, About , Contact , User } from './components/'
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements, useLoaderData } from 'react-router-dom'
+import {Home, About , Contact , User , Github, githubInfoLoader } from './components/'
 import Layout from './Layout.jsx'
 // const router = createBrowserRouter([
 //   {
@@ -35,6 +35,7 @@ const router = createBrowserRouter(
       <Route path='/contact' element = {<Contact/>}/>
       <Route path='/about' element = {<About/>}/>
       <Route path='/user/:userId' element = {<User/>}/>
+      <Route loader = {githubInfoLoader} path='/github' element = {<Github/>}/>
     </Route>
 
     
