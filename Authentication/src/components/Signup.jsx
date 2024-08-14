@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 function Signup() {
     const [form, setForm] = useState({
         username: '',
         email: '',
         password: ''
     });
+
+    const navigate = useNavigate();
 
     const handleChange = e => {
         setForm({
@@ -18,9 +21,10 @@ function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/signup', form);
-            console.log('Response: ', response.data);
-        }
+            const request = await axios.post('http://localhost:3000/signup', form);
+            console.log('Request: ', request.data);
+            navigate('/login');
+         }
         catch (error) {
             console.error('Error:', error);
         }
