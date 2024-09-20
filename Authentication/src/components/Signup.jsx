@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+
 function Signup() {
     const [form, setForm] = useState({
         username: '',
@@ -21,11 +21,12 @@ function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const request = await axios.post('http://localhost:3000/signup', form);
+            const request = await axios.post('http://localhost:3001/signup', form);
             console.log('Request: ', request.data);
-            navigate('/login');
-         }
-        catch (error) {
+            if (request.data === "Signup successful, OTP sent to your email") {
+                navigate('/send-otp');
+            }
+        } catch (error) {
             console.error('Error:', error);
         }
     }
@@ -53,7 +54,7 @@ function Signup() {
                 <p>Already have an account?</p>
 
                 <Link to="/login" className="flex items-center mt-10 justify-between">
-                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 size-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
+                    <button type="button" className="bg-blue-500 hover:bg-blue-700 size-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
                 </Link>
             </form>
         </div>
@@ -61,31 +62,3 @@ function Signup() {
 }
 
 export default Signup;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

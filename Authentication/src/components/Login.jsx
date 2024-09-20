@@ -8,28 +8,30 @@ function Login() {
     email: '',
     password: ''
   });
-
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.id]: e.target.value
-    })
-  }
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/login', form);
-      console.log('Response: ', response.data);
-      if (response.data === 'Login Successful'){
-        navigate('/home');}   
+      const response = await axios.post('http://localhost:3001/login', form);
+      if (response.data === 'Login Successful') {
+        navigate('/home'); // Redirect to the home page after a successful login
+      } else {
+        setErrorMessage(response.data);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      setErrorMessage('Server error, please try again later.');
     }
-    catch (error) {
-      console.error('Error:', error);
-    }
-  }
+  };
   return (
     <div className="container mx-auto flex justify-center items-center h-screen">
       <form onSubmit={handleSubmit} className="w-1/2 bg-gray-200 p-8 rounded">

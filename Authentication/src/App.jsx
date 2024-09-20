@@ -3,6 +3,7 @@ import Signup from './components/Signup'
 import Login from './components/Login'
 import Home from './components/Home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Otp from './components/OtpVerification'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signup" element={<Signup />} > </Route>
         <Route path="/login" element={<Login />} ></Route>
         <Route path = "/home" element = {<Home />}></Route>
+        <Route path='/send-otp' element={<Otp />} ></Route>
       </Routes>
     </BrowserRouter>
   )
